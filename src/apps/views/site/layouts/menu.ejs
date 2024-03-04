@@ -1,0 +1,22 @@
+
+                    <!-- menu -->
+    <div class="container">
+        <div id="menu" class="collapse">
+            <ul>
+                <li class="menu-itemn"><a href="/">TRANG CHỦ</a></li>
+                <li class="menu-itemn"><a href="/">DANH MỤC SẢN PHẨM</a>
+                    <ul>
+
+                        <% for(category of categories){%>
+                            <li class="menu-itemn2 col-lg-4 col-md-6 col-sm-12"><a href="/category/<%=category.slug%>/<%=category._id%>"><%=category.title%></a></li>
+                            <% }%>
+                    </ul>
+                </li>
+                <li class="menu-itemn"><a href="/">SẢN PHẨM MỚI</a></li>
+                <li class="menu-itemn"><a href="/">DEAL HỜI</a></li>
+                <li class="menu-itemn"><a href="/">HỢP TÁC</a></li>
+                <li class="menu-itemn"><a href="/">LIÊN HỆ</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- end menu -->

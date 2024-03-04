@@ -1,0 +1,180 @@
+<%- include("./layouts/head.ejs")%>
+<%- include("./layouts/header.ejs")%>
+<%- include("./layouts/menu.ejs")%>
+
+    
+
+    <!-- body -->
+    <div id="body">
+        <div class="container">
+            <%- include("./layouts/sidebar.ejs")%>
+
+            <!-- main -->
+
+            <div class="products">
+
+                <div class="row section row-cols-lg-1 row-cols-md-1 row-cols-1">
+                    <h2>
+                        <div style="float: left;" class="countdown">
+                            <p>SẢN PHẨM FLASH SALE | KẾT THÚC SAU: </p>
+                        </div>
+                        <div id="countdown" ></div>
+                </h2>
+                </div>
+
+
+                <div class="product-list row row-cols-lg-6 row-cols-md-4 row-cols-3">
+        
+                    <%for(product of spsale){%>
+                    <div class="product-item">
+                        <div class="product-itemn-inner card">
+                            <div class="sale">
+                                <p class="nhapnhay">-<%= Math.round(100-(product.pricesale/product.price)*100)%>%</p>
+                            </div>
+                            <div class="salesp">
+                                <a href="/product/<%=product.slug%>/<%=product._id%>"><img src="images/New folder/<%=product.images[0].image%>" />
+                                </a>
+                                <h2><a href="/product/<%=product.slug%>/<%=product._id%>"><%=product.name%></a></h2>
+                                <p>
+                                    <span style="text-decoration: line-through;"><%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(product.price)%></span>
+                                    <span style="font-weight: bold; color: #eb1f27;">(-<%= Math.round(100-(product.pricesale/product.price)*100)%>%)</span>
+                                </p>
+                                <p>
+                                    <sapn class="giasale"><%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(product.pricesale)%></sapn>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% }%>
+
+                </div>
+            </div>
+
+            <div>
+                <div class="row section row-cols-lg-1 row-cols-md-1 row-cols-1 index_sp">
+                    <h2>
+                        <p>SẢN PHẨM BÁN CHẠY</p>
+                    </h2>
+                </div>
+
+                <div class="product-list row row-cols-lg-6 row-cols-md-4 row-cols-3">
+                    <%for(product of spbanchay){%>
+                    <div class="product-item">
+                        <div class="product-itemn-inner card">
+                            <div class="iconhot">
+                                <img src="./images/New folder/icon hot.gif" />
+                            </div>
+                            <div class="salesp">
+                                <a href="/product/<%=product.slug%>/<%=product._id%>"><img src="images/New folder/<%=product.images[0].image%>"
+                                        title="NƯỚC HOA GUCCI GUILTY ELIXIR DE PARFUM POUR" />
+                                </a>
+                                <h2><a href="/product/<%=product.slug%>/<%=product._id%>"><%=product.name%></a></h2>
+                                <p><span
+                                        style="text-decoration: line-through;"><%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(product.price)%></span> <span
+                                        style="font-weight: bold; color: #eb1f27;">(-<%= Math.round(100-(product.pricesale/product.price)*100)%>%)</span></p>
+                                <p>
+                                    <sapn class="giasale"><%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(product.pricesale)%></sapn>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% }%>
+                </div>
+            </div>
+
+            <div>
+                <div class="row section row-cols-lg-1 row-cols-md-1 row-cols-1 index_sp">
+                    <h2>
+                        <p>SẢN PHẨM MỚI</p>
+                    </h2>
+                </div>
+
+                <div class="product-list row row-cols-lg-6 row-cols-md-4 row-cols-3">
+                    <%for(product of spmoi){%>
+                    <div class="product-item">
+                        <div class="product-itemn-inner card">
+                            <div class="iconnew">
+                                <img src="./images/New folder/icon new.png" />
+                            </div>
+                            <div class="salesp">
+                                <a href="/product/<%=product.slug%>/<%=product._id%>"><img src="./images/New folder/<%=product.images[0].image%>"
+                                        title="NƯỚC HOA GUCCI GUILTY ELIXIR DE PARFUM POUR" />
+                                </a>
+                                <h2><a href="/product/<%=product.slug%>/<%=product._id%>"><%=product.name%> </a></h2>
+                                <p><span
+                                        style="text-decoration: line-through;">
+                                        <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(product.price)%>
+                                    </span> <span
+                                        style="font-weight: bold; color: #eb1f27;">(-<%= Math.round(100-(product.pricesale/product.price)*100)%>%)</span></p>
+                                <p>
+                                    <sapn class="giasale">
+                                        <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(product.pricesale)%>
+                                    </sapn>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% }%>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- end main -->
+
+    </div>
+    <!-- end body -->
+
+    <%- include("./layouts/footer.ejs")%>
+
+
+
+
+
+    <script>
+        // thanh 3 chấm menu
+        function myFunction(x) {
+            x.classList.toggle("change");
+        }
+
+        // đếm thòi gian
+        function updateCountdown() {
+            let now = new Date();
+            let target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 3, 0, 0, 0);
+            let diff = target - now;
+
+            if (diff <= 0) {
+                location.reload();
+            }
+
+            let hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+            let minutes = Math.floor(diff / 1000 / 60) % 60;
+            let seconds = Math.floor(diff / 1000) % 60;
+
+            document.querySelector("#countdown").innerHTML = `
+            <div class="flass">${hours}</div>
+            <div class="flass" style="width:8px; padding:0px; background:none; border: none">:</div> 
+            <div class="flass">${minutes}</div> 
+            <div class="flass" style="width:8px; padding:0px; background:none; border: none">:</div>
+            <div class="flass">${seconds} </div>`;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        window.onscroll = function () { scrollFunction() };
+
+
+
+    </script>
+
+</body>
+
+</html>

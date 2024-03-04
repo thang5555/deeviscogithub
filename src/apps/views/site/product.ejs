@@ -1,0 +1,394 @@
+<%- include("./layouts/head.ejs")%>
+    <%- include("./layouts/header.ejs")%>
+        <%- include("./layouts/menu.ejs")%>
+
+            <div id="body">
+                <div class="container">
+                    <div class="row">
+                        <!-- main -->
+
+                        <!-- menu chính -->
+                        <div class="main col-lg-9 col-md-12 col-sm-12">
+                            <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 img_product">
+                                    <!-- Full-width images with number text -->
+
+                                    <% for(products of product.images){%>
+                                        <div class="mySlides">
+                                            <div class="numbertext">
+                                                <%=products.stt%>/6
+                                            </div>
+                                            <img src="images/New folder/<%=products.image%>"
+                                                style="width:400px; height: 400px;">
+                                        </div>
+                                        <%}%>
+                                            <!-- Next and previous buttons -->
+                                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
+
+                                            <!-- Thumbnail images -->
+                                            <div class="row" style="margin-top: 5px; padding: 0 14px;">
+
+                                                <% for(products of product.images){%>
+                                                    <div class="column">
+                                                        <img class="demo cursor"
+                                                            src="images/New folder/<%=products.image%>"
+                                                            style="width:100%" onclick="currentSlide(<%=products.stt%>)"
+                                                            alt="<%=products.image%>">
+                                                    </div>
+                                                    <%}%>
+
+                                            </div>
+                                </div>
+                                <div class="chitietsp col-lg-6 col-md-6 col-sm-12">
+                                    <a style="color: #9a9a94;"
+                                        href="/category/<%=category.slug%>/<%=category._id%>">DANH MỤC:
+                                        <%=category.title%>
+                                    </a>
+
+                                    <p>
+                                    <h2><span style="font-weight: bold; font-size: 15px;">
+                                            <%=product.name%>
+                                        </span></h2>
+                                    </p>
+
+                                    <p>
+                                        <span
+                                            style="color:#5d5d5d; text-decoration:line-through; font-size: 18px; margin-bottom: 0;">
+                                            <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                                minimumFractionDigits: 0, }).format(product.price)%>
+                                        </span>
+                                        <span class="nhapnhay"> (-<%=
+                                                Math.round(100-(product.pricesale/product.price)*100)%>%)</span>
+                                        <span
+                                            style="font-size: 22px;; color: #f44336; margin-left: 2%; font-weight: bold; font-style: italic;">
+                                            <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                                minimumFractionDigits: 0, }).format(product.pricesale)%>
+                                        </span>
+                                    </p>
+                                    <p><span class="thongso">√ Nhóm hương: </span>
+                                        <%=product.nhomhuong%>.
+                                    </p>
+                                    <p><span class="thongso">√ Giới tính: </span>
+                                        <%=product.gioitinh%>
+                                    </p>
+                                    <p><span class="thongso">√ Phong Cách: </span>
+                                        <%=product.dotuoi%>.
+                                    </p>
+                                    <p><span class="thongso">√ Độ lưu hương: </span>8 – 12 giờ, sử dụng trên quần áo có
+                                        thể lên tới 24 giờ</p>
+                                    <p><span class="thongso">√ Độ toả hương: </span>Trong vòng bán kính 1 cánh tay.</p>
+                                    <p><span class="thongso">√ Thời điểm khuyên dùng: </span>Ngày, Đêm, Hạ, Thu, Đông,
+                                        Xuân.
+                                    </p>
+                                    <p><span class="thongso">√ Xuất xứ: </span>Việt nam</p>
+                                    <p><span class="thongso">√ Thương hiệu: </span>DEEVISCO</p>
+                                    <p><span class="thongso">√ Dung tích: </span>10ml</p>
+
+                                    <%if(product.trangthai){%>
+                                        <div style="color: #007bff; font-weight: bold;">Còn hàng</div>
+                                        <% }else{%>
+                                            <div id="status" class="text-danger" style="font-weight: bold">Hết hàng
+                                            </div>
+                                            <% }%>
+
+
+                                                <%if(product.trangthai){%>
+                                                    <form method="post" action="/add-to-cart">
+                                                        <input type="hidden" name="id" value="<%=product._id%>">
+                                                        <div class="form-row align-items-center">
+                                                            <div class="col-sm-3 my-1">
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control" min="1"
+                                                                        value="1" name="qty" id="quantity"
+                                                                        placeholder="Số lượng">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto my-1">
+                                                                <button type="submit" class="btn btn-primary">Thêm vào
+                                                                    giỏ hàng</button>
+                                                            </div>
+                                                            <!-- <div id="add-cart"><a href="#">Mua ngay</a></div> -->
+                                                        </div>
+                                                    </form>
+                                                    <% }%>
+                                </div>
+
+                                <div id="product-body" class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <h3>Đánh giá về <%=product.name%>
+                                        </h3>
+                                        <p>
+                                            <%-product.content%>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                <!--	Comment	-->
+                                <div id="comment" class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <h3>Bình luận sản phẩm</h3>
+                                        <form method="post">
+                                            <div class="form-group">
+                                                <label>Tên:</label>
+                                                <input name="name" required type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email:</label>
+                                                <input name="email" required type="email" class="form-control" id="pwd">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nội dung:</label>
+                                                <textarea name="content" required rows="8"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                            <button type="submit" name="sbm" class="btn btn-primary">Gửi</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--	End Comment	-->
+
+                                <!--	Comments List	-->
+                                <div id="comments-list" class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                        <% for(comment of comments){%>
+                                            <div class="comment-item">
+                                                <ul>
+                                                    <li><b>
+                                                            <%=comment.name%>
+                                                        </b></li>
+                                                    <li>
+                                                        <%=comment.createdAt%>
+                                                    </li>
+                                                    <li style="border-bottom: 1px dashed #bbb;">
+                                                        <p>
+                                                            <%=comment.content%>
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <%}%>
+
+                                    </div>
+                                </div>
+                                <!--	End Comments List	-->
+
+                                <!-- <div id="pagination">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Trang trước</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Trang sau</a></li>
+                                    </ul>
+                                </div> -->
+
+
+                            </div>
+
+                        </div>
+                        <!-- end menu chính -->
+
+                        <!-- sliba -->
+                        <div class="sliba col-lg-3 col-md-12 col-sm-12 an">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-4">
+                                    <div class="sliba-item" style="background:#fa5130;"><img
+                                            src="./images/icon-mxh/4.png"><span
+                                            style="font-weight: bold; color:#fff; font-size: 15px;">HỖ TRỢ TRỰC
+                                            TUYẾN</span>
+                                    </div>
+                                    <div class="sliba-item"> <img src="./images/icon-mxh/5.png">Gọi tư vấn:<span
+                                            style="color:red; font-weight: bold;"
+                                            style="color:red; font-weight: bold;">09.222.73.111</span>
+                                    </div>
+                                    <div class="sliba-item">
+                                        <div><img src="./images/icon-mxh/6.png">Hotline:<span
+                                                style="color:red; font-weight: bold;">02422 169 568</span></div>
+                                        <hr>
+                                        <div>
+                                            <img src="./images/icon-mxh/giaohangtoanquoc.png">
+                                            Thời gian giao hàng 1-2 ngày.</br>
+                                            <span style="font-weight: bold; margin:0 0 0 20%;">MIỄN PHÍ VẬN
+                                                CHUYỂN</span></br>
+                                            <span style="margin:0 0 0 20%;">cho đơn hàng từ</span></br>
+                                            <span style="font-weight: bold; margin:0 0 0 20%;">2 chai trở lên</span>
+
+                                        </div>
+                                        <hr>
+                                        <div><img src="./images/icon-mxh/chinh-sach-doi-tra-f88.png">Đổi trả
+                                            30 ngày miễn phí
+                                        </div>
+                                        <hr>
+                                        <div><img src="./images/New folder/icon-bao-hanh.png">Bảo hành mùi hương trọn
+                                            đời</div>
+                                        <hr>
+                                        <div><img src="./images/icon-mxh/Thanh-toan.png">Hình thức thanh toán đa
+                                            dạng,<br><span style="margin:0 0 0 20%;">chấp nhận COD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-4">
+                                    <div class="sliba-item">
+                                        <div style="background:#fa5130;">
+                                            <img src="./images/icon-mxh/4.png">
+                                            <span style="font-weight: bold; color:#fff; font-size: 13px;">SẢN PHẨM FLASH
+                                                SALE</span>
+                                        </div>
+                                        <div class="hopthoaicate">
+                                            <%for(product of spsale){%>
+                                                <div class="product-item bannercategori">
+                                                    <div class="product-itemn-inner card cardcategori"
+                                                        style="margin-bottom: 10px;">
+                                                        <div class="sale">
+                                                            <p class="nhapnhay">-<%=
+                                                                    Math.round(100-(product.pricesale/product.price)*100)%>
+                                                                    %</p>
+                                                        </div>
+                                                        <div class="salesp">
+                                                            <a href="/product/<%=product.slug%>/<%=product._id%>"><img
+                                                                    src="images/New folder/<%=product.images[0].image%>" />
+                                                            </a>
+                                                            <h2><a href="/product/<%=product.slug%>/<%=product._id%>"
+                                                                    title="<%=product.name%>">
+                                                                    <%=product.name%>
+                                                                </a></h2>
+                                                            <p style="margin-bottom: 0px; text-align: center;">
+                                                                <span style="text-decoration: line-through;">
+                                                                    <%= new Intl.NumberFormat("vi-VN", {
+                                                                        style: "currency" , currency: "VND" ,
+                                                                        minimumFractionDigits: 0,
+                                                                        }).format(product.price)%>
+                                                                </span>
+                                                                <span style="font-weight: bold; color: #eb1f27;"
+                                                                    class="nhapnhay">(-<%=
+                                                                        Math.round(100-(product.pricesale/product.price)*100)%>
+                                                                        %)</span>
+                                                            </p>
+                                                            <p style="margin-bottom: 0;">
+                                                                <sapn class="giasale">
+                                                                    <%= new Intl.NumberFormat("vi-VN", {
+                                                                        style: "currency" , currency: "VND" ,
+                                                                        minimumFractionDigits: 0,
+                                                                        }).format(product.pricesale)%>
+                                                                </sapn>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }%>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-4" style="padding: 0px;">
+                                <div class="sliba-item">
+                                    <div style="background:#fa5130;">
+                                        <img src="./images/icon-mxh/4.png">
+                                        <span style="font-weight: bold; color:#fff; font-size: 15px;">SẢN PHẨM
+                                            MỚI</span>
+                                    </div>
+                                    <div class="hopthoaicate">
+                                        <%for(product of spmoi){%>
+                                            <div class="product-item bannercategori" style="margin-bottom: 4%;">
+                                                <div class="product-itemn-inner card cardcategori">
+                                                    <div class="iconnew">
+                                                        <img src="./images/New folder/icon new.png"
+                                                            style="width: 22%; margin-left: 80%;" />
+                                                    </div>
+                                                    <div class="salesp" style="margin-bottom: -5%;">
+                                                        <a href="/product/<%=product.slug%>/<%=product._id%>"><img
+                                                                src="images/New folder/<%=product.images[0].image%>"
+                                                                title="<%=product.name%>" style="margin-top: -9%;" />
+                                                        </a>
+                                                        <h2><a href="/product/<%=product.slug%>/<%=product._id%>">
+                                                                <%=product.name%>
+                                                            </a>
+                                                        </h2>
+                                                        <p style="padding-top: 10px; margin-bottom: 0px;"><span
+                                                                style="text-decoration: line-through;">
+                                                                <%= new Intl.NumberFormat("vi-VN", { style: "currency" ,
+                                                                    currency: "VND" , minimumFractionDigits: 0,
+                                                                    }).format(product.price)%>
+                                                            </span> <span style="font-weight: bold; color: #eb1f27;">(-
+                                                                <%=
+                                                                    Math.round(100-(product.pricesale/product.price)*100)%>
+                                                                    %)
+                                                            </span></p>
+                                                        <p>
+                                                            <sapn class="giasale">
+                                                                <%= new Intl.NumberFormat("vi-VN", { style: "currency" ,
+                                                                    currency: "VND" , minimumFractionDigits: 0,
+                                                                    }).format(product.pricesale)%>
+                                                            </sapn>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% }%>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end sliba -->
+                </div>
+
+            </div>
+            </div>
+            <!-- end body -->
+
+            <%- include("./layouts/footer.ejs")%>
+
+
+
+                <script>
+                    // thanh 3 chấm menu
+                    function myFunction(x) {
+                        x.classList.toggle("change");
+                    }
+
+                    // ảnh sản phẩm
+                    let slideIndex = 1;
+                    showSlides(slideIndex);
+
+                    // Next/previous controls
+                    function plusSlides(n) {
+                        showSlides(slideIndex += n);
+                    }
+
+                    // Thumbnail image controls
+                    function currentSlide(n) {
+                        showSlides(slideIndex = n);
+                    }
+
+                    function showSlides(n) {
+                        let i;
+                        let slides = document.getElementsByClassName("mySlides");
+                        let dots = document.getElementsByClassName("demo");
+                        let captionText = document.getElementById("caption");
+                        if (n > slides.length) { slideIndex = 1 }
+                        if (n < 1) { slideIndex = slides.length }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        slides[slideIndex - 1].style.display = "block";
+                        dots[slideIndex - 1].className += " active";
+                        captionText.innerHTML = dots[slideIndex - 1].alt;
+                    }
+                    // end ảnh sản phẩm
+
+                </script>
+                </body>
+
+                </html>
