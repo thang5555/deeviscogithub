@@ -133,7 +133,7 @@ const order = async (req, res) => {
         });
     await transporter.sendMail({
         from: '"DEEVISCO™ SHOP" <kinhdoanh.deevisco@gmail.com>', // sender address
-        to: [body.mail, "bsthang9x@gmail.com" ],// list of receivers
+        to: body.mail,// list of receivers
         subject: "Xác nhận đơn hàng từ DEEVISCO™", // Subject line
         html, // html body
     });
