@@ -613,13 +613,18 @@ h1 {
         width: 6%;
         margin-bottom: 3%;
     }
-
+    .collapse:not(.show) {
+        display: block;
+    }
 }
 
 
 @media(min-width:992px) {
     .tabmenu {
         opacity: 0;
+    }
+    .collapse:not(.show) {
+        display: block;
     }
 }
 
@@ -862,7 +867,6 @@ h1 {
     }
 }
 
-
 /* search */
 #search-result {
     background-color: #fa5130;
@@ -1061,4 +1065,14 @@ h1 {
 
 .annode {
     display: none;
+}
+
+@media (max-width: 768px) {
+    
+    .style_cate{
+        height: 45px;
+    }
+    .style_cate p{
+        font-size: 45%;
+    }
 }
