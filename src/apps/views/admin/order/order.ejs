@@ -1,0 +1,100 @@
+<%- include("../layout/head", {title: "Comment" })%>
+<%- include("../layout/header")%>
+<%- include("../layout/siderbar")%>
+
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#"><svg class="glyph stroked home">
+                            <use xlink:href="#stroked-home"></use>
+                        </svg></a></li>
+                <li class="active">Danh Sách Đơn Hàng</li>
+            </ol>
+        </div><!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Danh Sách Đơn Hàng </h1>
+            </div>
+        </div><!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table data-toolbar="#toolbar" data-toggle="table">
+
+                            <thead>
+                                <tr>
+                                    <th data-field="id" data-sortable="true">ID</th>
+                                    <th data-field="name" data-sortable="true">Họ Tên KH>
+                                    <th data-field="price" data-sortable="true">Địa chỉ KH</th>
+                                    <th>Email</th>
+                                    <th>Sô Điện Thoại KH</th>
+                                    <th>Sản Phẩm</th>
+                                    <th>Đơn Giá</th>
+                                    <th>Sô Lượng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Thời gian</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <% for(order of orderCart){%>
+                                <tr>
+                                    <td>1</td>
+                                    <td><%=order.name%></td>
+                                    <td><%=order.add%></td>
+                                    <td><%=order.mail%></td>
+                                    <td><%=order.phone%></td>
+                                    <td> <% for(item of order.items){%>
+                                       <%=item.name%> </br>
+                                    <%}%></td>
+                                    <td><% for(item of order.items){%>
+                                        <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(item.price)%></br>
+                                     <%}%></td>
+                                    <td><% for(item of order.items){%>
+                                        <%=item.qty%> </br>
+                                     <%}%></td>
+                                    <td><% for(item of order.items){%>
+                                        <%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                        minimumFractionDigits: 0, }).format(item.price*item.qty)%></br>
+                                     <%}%></td>
+                                     <td><%= new Intl.DateTimeFormat('en-US').format(order.createdAt)%></td>
+                                    <td><span style="<%=order.trangthai? "" : "color: red; font-weight: bold;" %></span>">
+                                        <%=order.trangthai? "Đã xử lý" : "Chưa xử lý" %></span></td>
+                                    <td class="form-group">
+                                        <a href="/admin/editOrder/:<%=item.id%>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                                        <!-- <a href="/delete/65f8615689925cdb60917f9b" class="btn btn-danger"><i
+                                                class="glyphicon glyphicon-remove"></i></a> -->
+                                    </td>
+                           
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- <div class="panel-footer">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                            </ul>
+                        </nav>
+                    </div> -->
+                </div>
+            </div>
+        </div><!--/.row-->
+    </div> <!--/.main-->
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+
+
+    <%- include("../layout/footer")%>

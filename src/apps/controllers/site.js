@@ -1,11 +1,11 @@
 const CategoryModel = require("../models/category");
 const CommentModel = require("../models/comments");
 const ProductModel = require("../models/product");
+const OrderModel = require("../models/order");
 const ejs = require("ejs");
 const path = require("path");
 const transporter = require("../../common/transporter");
 const { getMaxListeners } = require("events");
-const VoucherkmModel = require("../models/voucherkm");
 const { log } = require("console");
 const home = async (req, res) => {
     const spmoi = await ProductModel.find({
@@ -41,6 +41,7 @@ const product = async (req, res) => {
     const id = req.params.id;
     const product = await ProductModel.findById(id);
     const category = await CategoryModel.findById(product.categori_id);
+    const product_cate = await ProductModel.find({categori_id:product.categori_id});
     const comments = await CommentModel
         .find({ product_id: id })
         .sort({ _id: -1 });
@@ -52,16 +53,18 @@ const product = async (req, res) => {
             spmoi: true,
             trangthai: true,
         });
-    res.render("site/product", { product, comments, category, spsale, spmoi});
+    res.render("site/product", { product, comments, category, spsale, spmoi, product_cate});
 }
 const comment = async (req, res) => {
     const product_id = req.params.id;
+    const namesp = req.params.slug;
     const { name, email, content } = req.body;
     const comment = {
         product_id,
         name,
         email,
         content,
+        namesp,
     }
     await new CommentModel(comment).save();
     res.redirect(req.path);
@@ -104,6 +107,32 @@ const addToCart = async (req, res) => {
     res.redirect("/cart");
 }
 
+const addcart = async (req, res) =>{
+    const id = req.params.id;
+    const qty = parseInt(req.body.qty);
+    const items = req.session.cart;
+    let isProductExists = false;
+    items.map((item) => {
+        if (item.id === id) {
+            item.qty += qty;
+            isProductExists = true;
+        }
+        return item;
+    });
+    if (!isProductExists) {
+        const product = await ProductModel.findById(id);
+        items.push({
+            id,
+            name: product.name,
+            thumbnail: product.images[0].image,
+            price: product.pricesale,
+            qty: 1,
+        });
+    }
+    req.session.cart = items;
+    res.redirect("/cart");
+}
+
 const cart = async (req, res) => {
     const cart = req.session.cart
     res.render("site/cart", { cart, });
@@ -137,6 +166,26 @@ const order = async (req, res) => {
         subject: "Xác nhận đơn hàng từ DEEVISCO™", // Subject line
         html, // html body
     });
+    // add order vào database
+    const orderCart = {
+        name: body.name,
+        phone: body.phone,
+        mail: body.mail,
+        add: body.add,
+        trangthai: false,
+    };
+    const itemCart = [];
+    for(item of items){
+        cartorder ={
+        name: item.name,
+        thumbnail: item.thumbnail,
+        price: item.price,
+        qty: item.qty
+        }
+        itemCart.push(cartorder);
+    };
+    orderCart["items"]= itemCart;
+    new OrderModel(orderCart).save();
     req.session.cart = [];
     res.redirect("/success");
 }
@@ -160,6 +209,7 @@ module.exports = {
     comment,
     search,
     cart,
+    addcart,
     updateCart,
     order,
     deleteCart,

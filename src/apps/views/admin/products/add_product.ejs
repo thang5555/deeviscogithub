@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Danh mục</label>
-                                        <select name="cat_id" class="form-control">
+                                        <select name="categori_id" class="form-control">
                                             <% for(category of categories){%>
                                                 <option value=<%=category._id %>><%=category.title%>
                                                 </option>
@@ -82,21 +82,21 @@
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="spmoi" type="checkbox" value=1>Sản phẩm mới
+                                                <input name="spmoi" type="checkbox" value="on">Sản phẩm mới
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="spbanchay" type="checkbox" value=1>Sản phẩm bán chạy
+                                                <input name="spbanchay" type="checkbox" value="on">Sản phẩm bán chạy
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="spsale" type="checkbox" value=1>Sản phẩm sale
+                                                <input name="spsale" type="checkbox" value="on">Sản phẩm sale
                                             </label>
                                         </div>
                                     </div>

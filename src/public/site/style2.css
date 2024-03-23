@@ -127,7 +127,7 @@ h1 {
     position: absolute;
     display: none;
     width: 300px;
-    z-index: 999;
+    z-index: 2;
 }
 
 #menu ul li ul {
@@ -139,7 +139,7 @@ h1 {
 
 #menu ul li ul li {
     float: left;
-    width: 300px;
+    width: 250px;
 }
 
 #menu {
@@ -204,10 +204,9 @@ h1 {
     padding-left: 5px;
     padding-right: 5px;
     padding-bottom: 10px;
-    ;
     text-align: center;
+    position: relative;
 }
-
 .product-item img {
     width: -webkit-fill-available;
     height: 160px;
@@ -224,8 +223,8 @@ h1 {
     border: 1px solid red;
     cursor: pointer;
     opacity: 50%;
-    transform: scale(1.08);
-    transition: all ease-in-out 0.5s;
+    /* transform: scale(1.08);
+    transition: all ease-in-out 0.5s; */
 }
 
 .product-item p {
@@ -233,6 +232,51 @@ h1 {
     text-align: center;
 }
 
+.product-item:hover .mask{
+    cursor: pointer;
+    display: block;
+}
+.product-item:hover .mask{
+    cursor: pointer;
+    display: block;
+}
+.mask img:hover{
+    transform: rotate(360deg);
+    cursor: pointer;
+    background: #ee4d2d;
+}
+
+.product-item{
+    z-index: 1;
+}
+.product_image img{
+    height: 400px;
+    width: 400px;
+}
+.mask img{
+    padding: 8px;
+    height: 30px;
+    width: 30px;
+    transition-property: transform;
+    transition-duration: 0.5s;
+    border-radius: 100%;
+}
+.mask{
+    display: none;
+    position: absolute;
+    width: 93%;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    text-align: center;
+    background: #FFF;
+    margin-top: 184px;
+    margin-left: 6px;
+}
+.mask a{
+    margin-left: 5px;
+    margin-right: 5px;
+}
 .card {
     padding: 0px 5px 0px 5px;
 }
@@ -460,7 +504,7 @@ h1 {
     }
 
     #search input {
-        width: 120px;
+        width: 110px;
         margin-left: 3px;
     }
 
@@ -498,17 +542,29 @@ h1 {
 
     #menu {
         font-size: 46%;
+        height: 25px;
     }
 
     #menu ul li {
         padding-right: 10px;
+        height: 25px;
+        line-height: 30px;
     }
 
     #menu ul {
         padding-left: 10px;
         font-size: 7px;
     }
-
+    #menu ul li ul{
+        width: min-content;
+        margin-top: -5px
+    }
+    #menu ul li ul li{
+        float: none;
+        border-bottom: 1px solid plum;
+        height: 20px;
+        line-height: 22px;
+    }
     #countdown {
         font-size: 10px;
     }
@@ -524,8 +580,8 @@ h1 {
         font-size: 18%;
         padding-right: 40px;
         padding-bottom: 10px;
-        padding-top: 10px;
-        font-size: 30%;
+        padding-top: 9px;
+        font-size: 27%;
         line-height: 30px;
     }
 
@@ -541,6 +597,10 @@ h1 {
     }
     .product-item img{
         height: auto;
+    }
+    .product_image img{
+        width: 340px;
+        height: 330px;
     }
     .index_sp p{
         line-height: 15px;
@@ -578,6 +638,10 @@ h1 {
 
     .salesp img {
         margin-top: 6px;
+    }
+    .product_cate img{
+        height: 700px;
+        width: 700px;
     }
     .img_product{
         margin-bottom: 10px;
@@ -859,6 +923,9 @@ h1 {
     .an {
         display: none;
     }
+    .main {
+        margin-top: 5px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -875,7 +942,6 @@ h1 {
     padding-bottom: 1%;
     padding-top: 1%;
     padding-left: 1%;
-    font-size: 130%;
     color: #fff;
 }
 
@@ -1070,9 +1136,15 @@ h1 {
 @media (max-width: 768px) {
     
     .style_cate{
-        height: 45px;
+        height: 30px;
     }
     .style_cate p{
-        font-size: 45%;
+        font-size: 30%;
+    }
+    .annode{
+        display: block;
+    }
+    .h2_cate{
+        margin-top: -10px;
     }
 }

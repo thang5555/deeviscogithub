@@ -10,8 +10,8 @@
             <div class="products">
                 <div><img style="width: -webkit-fill-available;" src="images/New folder/<%=category.image%>"/></div>
 
-                <div class="row section row-cols-lg-1 row-cols-md-1 row-cols-1 tyle_cate">
-                    <h2>
+                <div class="row section row-cols-lg-1 row-cols-md-1 row-cols-1 style_cate">
+                    <h2 class="h2_cate">
                         <p><%=category.title%> (hiện có <%=total%> sản phẩm)</p>
                     </h2>
                 </div>
@@ -53,6 +53,10 @@
                                         minimumFractionDigits: 0, }).format(product.pricesale)%></sapn>
                                 </p>
                             </div>
+                        </div>
+                        <div class="mask">
+                            <img src="./images/New folder/icon-tim.png" /> 
+                            <a href="/addcart/<%=product._id%>"><img src="./images/New folder/icon-cart-den.png" /> </a>
                         </div>
                     </div>
                     <% }%>

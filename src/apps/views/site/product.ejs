@@ -19,8 +19,8 @@
                                             <div class="numbertext">
                                                 <%=products.stt%>/6
                                             </div>
-                                            <img src="images/New folder/<%=products.image%>"
-                                                style="width:400px; height: 400px;">
+                                          <div class="product_image"> <img src="images/New folder/<%=products.image%>" />
+                                                </div>
                                         </div>
                                         <%}%>
                                             <!-- Next and previous buttons -->
@@ -190,7 +190,53 @@
 
 
                             </div>
-
+                            <div class="main col-lg-12 col-md-12 col-sm-12 annode">
+                        
+                                <div class="products" style="margin-left: -22px; margin-right: -27px;">
+    
+                                    <div class="row section row-cols-lg-1 row-cols-md-1 row-cols-1">
+                                        <h2>
+                                            <div style="float: left; margin-top: -2.5%;" class="countdown">
+                                                <p>SẢN PHẨM CÙNG LOẠI </p>
+                                            </div>
+                                        </h2>
+                                    </div> 
+                    
+                                    <div class="hopthoaicate" style="height: auto;">
+                                    <div class="product-list row" style="width: max-content;">
+                                        <% for(product of product_cate){%>
+                                        <div class="product-item">
+                                            <div class="product-itemn-inner card">
+                                                <div class="sale">
+                                                    <p class="nhapnhay">-<%= Math.round(100-(product.pricesale/product.price)*100)%>%</p>
+                                                </div>
+                                                <div class="salesp product_cate">
+                                                    <a href="/product/<%=product.slug%>/<%=product._id%>"><img
+                                                            src="images/New folder/<%=product.images[0].image%>" style="zoom: 24%;"/>
+                                                    </a>
+                                                    <h2><a href="/product/<%=product.slug%>/<%=product._id%>"><%=product.name%></a></h2>
+                                                    <p>
+                                                        <span style="text-decoration: line-through;"><%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                                            minimumFractionDigits: 0, }).format(product.price)%></span>
+                                                        <span style="font-weight: bold; color: #eb1f27;">(-<%= Math.round(100-(product.pricesale/product.price)*100)%>%)</span>
+                                                    </p>
+                                                    <p>
+                                                        <sapn class="giasale"><%= new Intl.NumberFormat("vi-VN", { style: "currency" , currency: "VND" ,
+                                                            minimumFractionDigits: 0, }).format(product.pricesale)%></sapn>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="mask">
+                                                <img src="./images/New folder/icon-tim.png" />
+                                                <a href="/addcart/<%=product._id%>"><img src="./images/New folder/icon-cart-den.png" /> </a>
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
                         </div>
                         <!-- end menu chính -->
 

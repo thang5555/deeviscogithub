@@ -16,6 +16,11 @@ const commentSchema = new mongoose.Schema({
         type:String,
         required: true,
     },
+    namesp:{
+        type:String,
+        required: true,
+    },
+    
 }, {timestamps:true});
 const CommentModel = mongoose.model("Comments", commentSchema, "comment");
 module.exports = CommentModel;

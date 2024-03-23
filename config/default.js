@@ -13,7 +13,7 @@ module.exports = {
         secure: false,
         auth: {
             user: "kinhdoanh.deevisco@gmail.com",
-            pass: "lodn wamy avxg wmph",
+            pass: "cdzd jcra hkeb abiq",
         },
     }
 }
